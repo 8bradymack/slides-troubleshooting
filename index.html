@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calvary San Mateo ProPresenter troubleshooting guide - Quick fixes for display issues, slides, remote controls, and more">
     <title>Calvary Slides Troubleshooting</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📽️</text></svg>">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
@@ -343,7 +345,7 @@
             position: relative;
             padding-left: 10px;
         }
-        .faq-answer ol li::before {
+        .faq-answer ul li::before {
             content: '';
             position: absolute;
             left: -20px;
@@ -543,10 +545,10 @@
         <h1>📽️ Calvary Slides Setup</h1>
         <p class="subtitle">ProPresenter Troubleshooting Hub</p>
         <div class="search-container">
-            <input type="text" id="searchBar" placeholder="Search: 'no display', 'lyrics', 'blank screen'..." autocomplete="off">
+            <input type="text" id="searchBar" placeholder="Search: 'no display', 'lyrics', 'blank screen'..." autocomplete="off" aria-label="Search troubleshooting guides">
             <div class="search-icons-container">
-                <span class="search-icon" id="searchIcon">🔍</span>
-                <span class="clear-search" id="clearSearch">✕</span>
+                <span class="search-icon" id="searchIcon" aria-hidden="true">🔍</span>
+                <span class="clear-search" id="clearSearch" role="button" tabindex="0" aria-label="Clear search">✕</span>
             </div>
             <div class="suggestions-dropdown" id="suggestionsDropdown"></div>
         </div>
@@ -558,17 +560,17 @@
 
     <div class="container">
         <div class="emergency-actions" id="emergencyActions">
-            <div class="emergency-btn" data-issue="no-display">
+            <div class="emergency-btn" data-issue="no-display" role="button" tabindex="0" aria-label="Troubleshoot no display issue">
                 <span class="emergency-icon">🖥️</span>
                 <div class="emergency-title">NO DISPLAY</div>
                 <div class="emergency-subtitle">Screens not showing slides</div>
             </div>
-            <div class="emergency-btn display" data-issue="wrong-screen">
+            <div class="emergency-btn display" data-issue="wrong-screen" role="button" tabindex="0" aria-label="Troubleshoot wrong screen issue">
                 <span class="emergency-icon">🔀</span>
                 <div class="emergency-title">WRONG SCREEN</div>
                 <div class="emergency-subtitle">Output going to wrong display</div>
             </div>
-            <div class="emergency-btn slides" data-issue="not-advancing">
+            <div class="emergency-btn slides" data-issue="not-advancing" role="button" tabindex="0" aria-label="Troubleshoot slides not advancing issue">
                 <span class="emergency-icon">⏭️</span>
                 <div class="emergency-title">NOT ADVANCING</div>
                 <div class="emergency-subtitle">Clicker/remote not working</div>
@@ -578,12 +580,12 @@
         <div class="search-stats" id="searchStats"></div>
         
         <div class="categories" id="categories">
-            <button class="category-btn active" data-category="all">All</button>
-            <button class="category-btn" data-category="Setup">Setup</button>
-            <button class="category-btn" data-category="Display">Display</button>
-            <button class="category-btn" data-category="ProPresenter">ProPresenter</button>
-            <button class="category-btn" data-category="Remote Control">Remote Control</button>
-            <button class="category-btn" data-category="Content">Content</button>
+            <button class="category-btn active" data-category="all" aria-pressed="true">All</button>
+            <button class="category-btn" data-category="Setup" aria-pressed="false">Setup</button>
+            <button class="category-btn" data-category="Display" aria-pressed="false">Display</button>
+            <button class="category-btn" data-category="ProPresenter" aria-pressed="false">ProPresenter</button>
+            <button class="category-btn" data-category="Remote Control" aria-pressed="false">Remote Control</button>
+            <button class="category-btn" data-category="Content" aria-pressed="false">Content</button>
         </div>
 
         <div class="pinned-section" id="pinnedSection">
@@ -612,7 +614,7 @@
     <div id="contactModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);backdrop-filter:blur(10px);z-index:1000;padding:20px;">
         <div style="max-width:600px;margin:50px auto;background:rgba(30, 41, 59, 0.95);backdrop-filter:blur(20px);border:1px solid rgba(6, 182, 212, 0.3);border-radius:20px;padding:35px;box-shadow:0 20px 60px rgba(0,0,0,0.5);">
             <h2 style="color:#06b6d4;margin-bottom:15px;font-size:1.8em;">Report an Issue</h2>
-            <form id="contactForm" action="https://formspree.io/f/xqayyzrr" method="POST">
+            <form id="contactForm" action="https://formspree.io/f/myzbkpzp" method="POST">
                 <div style="margin-bottom:20px;">
                     <label style="display:block;font-weight:600;margin-bottom:10px;color:#e2e8f0;">Your Name (Optional)</label>
                     <input type="text" name="name" style="width:100%;padding:14px;border:2px solid rgba(6, 182, 212, 0.3);background:rgba(15, 23, 42, 0.6);color:white;border-radius:10px;">
@@ -714,50 +716,501 @@ const emergencyMap={'no-display':2,'wrong-screen':3,'not-advancing':4};
 let recentSearches=[];
 const MAX_RECENT=5;
 
-function loadRecentSearches(){const stored={};if(stored.recentSearches){recentSearches=stored.recentSearches;}}
-function saveRecentSearch(query){if(!query||query.length<2)return;query=query.trim().toLowerCase();recentSearches=recentSearches.filter(s=>s!==query);recentSearches.unshift(query);recentSearches=recentSearches.slice(0,MAX_RECENT);renderRecentSearches();}
-function renderRecentSearches(){const container=document.getElementById('recentSearches');const tagsContainer=document.getElementById('recentTags');if(recentSearches.length===0){container.style.display='none';return;}container.style.display='block';tagsContainer.innerHTML=recentSearches.map(search=>`<span class="recent-tag" onclick="applyRecentSearch('${search}')">${search}</span>`).join('')+'<button class="clear-recent" onclick="clearRecentSearches()">Clear</button>';}
-function applyRecentSearch(query){document.getElementById('searchBar').value=query;currentSearch=query;renderAll();}
-function clearRecentSearches(){recentSearches=[];renderRecentSearches();}
-function expandSearchQuery(query){let words=query.toLowerCase().split(/\s+/).filter(w=>w.length>0);const stopWords=['a','an','the','or','and','on','in','at','to','for','of','is','are'];words=words.filter(w=>!stopWords.includes(w)&&w!=='/');let expanded=new Set(words);words.forEach(word=>{if(advancedSynonyms[word]){advancedSynonyms[word].forEach(syn=>expanded.add(syn));}Object.keys(advancedSynonyms).forEach(key=>{if(advancedSynonyms[key].includes(word)){expanded.add(key);advancedSynonyms[key].forEach(syn=>expanded.add(syn));}});});problemPatterns.forEach(({pattern,boost})=>{if(pattern.test(query)){boost.forEach(term=>expanded.add(term));}});return Array.from(expanded).join(' ');}
-function highlightText(text,searchTerms){if(!searchTerms||searchTerms.length===0)return text;const stopWords=['a','an','the','or','and','on','in','at','to','for','of','is','are'];const termsToHighlight=searchTerms.filter(term=>!stopWords.includes(term.toLowerCase())&&term.length>1);let result=text;termsToHighlight.forEach(term=>{if(term.length<2)return;const regex=new RegExp(`(${term})`,'gi');result=result.replace(regex,'<span class="highlight">$1</span>');});return result;}
-function intelligentSearch(query){if(!query)return faqData;const originalQuery=query;const expandedQuery=expandSearchQuery(query);const stopWords=['a','an','the','or','and','on','in','at','to','for','of','is','are'];const searchTerms=query.toLowerCase().split(/\s+/).filter(w=>w.length>1&&!stopWords.includes(w));const fuse=new Fuse(faqData,{keys:[{name:'question',weight:0.45},{name:'keywords',weight:0.45},{name:'answer',weight:0.1}],threshold:0.45,includeScore:true,ignoreLocation:true,minMatchCharLength:2,distance:150,useExtendedSearch:true});let results=fuse.search(expandedQuery);if(results.length<3){const altResults=fuse.search(originalQuery);results=[...results,...altResults].filter((v,i,a)=>a.findIndex(t=>t.item.id===v.item.id)===i);}results=results.map(r=>({...r.item,score:r.score,searchTerms:searchTerms}));results.forEach(result=>{let bonusScore=0;const questionLower=result.question.toLowerCase();const keywordsLower=result.keywords.toLowerCase();const answerLower=result.answer.replace(/<[^>]*>/g,'').toLowerCase();if(questionLower.includes(originalQuery.toLowerCase())){bonusScore-=0.5;}if(keywordsLower.includes(originalQuery.toLowerCase())){bonusScore-=0.4;}searchTerms.forEach((term,index)=>{const isImportantTerm=term.length>4||['slide','remote'].includes(term);const multiplier=isImportantTerm?1.5:1.0;const positionBonus=index===0?1.2:1.0;if(questionLower.includes(term)){bonusScore-=0.25*multiplier*positionBonus;}if(keywordsLower.includes(term)){bonusScore-=0.2*multiplier*positionBonus;}const answerMatches=(answerLower.match(new RegExp('\\b'+term+'\\b','g'))||[]).length;bonusScore-=answerMatches*0.04;});if(result.pinned)bonusScore-=0.12;const allTermsInQuestion=searchTerms.every(term=>questionLower.includes(term));if(allTermsInQuestion)bonusScore-=0.4;const allTermsInKeywords=searchTerms.every(term=>keywordsLower.includes(term));if(allTermsInKeywords)bonusScore-=0.35;result.score+=bonusScore;});results.sort((a,b)=>a.score-b.score);return results;}
+function loadRecentSearches(){
+    try {
+        const stored = localStorage.getItem('recentSearches');
+        if(stored){
+            recentSearches = JSON.parse(stored);
+        }
+    } catch(e) {
+        console.warn('Could not load recent searches:', e);
+    }
+}
+
+function saveRecentSearch(query){
+    if(!query||query.length<2)return;
+    query=query.trim().toLowerCase();
+    recentSearches=recentSearches.filter(s=>s!==query);
+    recentSearches.unshift(query);
+    recentSearches=recentSearches.slice(0,MAX_RECENT);
+    try {
+        localStorage.setItem('recentSearches', JSON.stringify(recentSearches));
+    } catch(e) {
+        console.warn('Could not save recent searches:', e);
+    }
+    renderRecentSearches();
+}
+
+function renderRecentSearches(){
+    const container=document.getElementById('recentSearches');
+    const tagsContainer=document.getElementById('recentTags');
+    if(recentSearches.length===0){
+        container.style.display='none';
+        return;
+    }
+    container.style.display='block';
+    tagsContainer.innerHTML='';
+    recentSearches.forEach(search=>{
+        const tag = document.createElement('span');
+        tag.className = 'recent-tag';
+        tag.textContent = search;
+        tag.addEventListener('click', () => applyRecentSearch(search));
+        tagsContainer.appendChild(tag);
+    });
+    const clearBtn = document.createElement('button');
+    clearBtn.className = 'clear-recent';
+    clearBtn.textContent = 'Clear';
+    clearBtn.addEventListener('click', clearRecentSearches);
+    tagsContainer.appendChild(clearBtn);
+}
+
+function applyRecentSearch(query){
+    document.getElementById('searchBar').value=query;
+    currentSearch=query;
+    renderAll();
+}
+
+function clearRecentSearches(){
+    recentSearches=[];
+    try {
+        localStorage.removeItem('recentSearches');
+    } catch(e) {
+        console.warn('Could not clear recent searches:', e);
+    }
+    renderRecentSearches();
+}
+
+function expandSearchQuery(query){
+    let words=query.toLowerCase().split(/\s+/).filter(w=>w.length>0);
+    const stopWords=['a','an','the','or','and','on','in','at','to','for','of','is','are'];
+    words=words.filter(w=>!stopWords.includes(w)&&w!=='/');
+    let expanded=new Set(words);
+    words.forEach(word=>{
+        if(advancedSynonyms[word]){
+            advancedSynonyms[word].forEach(syn=>expanded.add(syn));
+        }
+        Object.keys(advancedSynonyms).forEach(key=>{
+            if(advancedSynonyms[key].includes(word)){
+                expanded.add(key);
+                advancedSynonyms[key].forEach(syn=>expanded.add(syn));
+            }
+        });
+    });
+    problemPatterns.forEach(({pattern,boost})=>{
+        if(pattern.test(query)){
+            boost.forEach(term=>expanded.add(term));
+        }
+    });
+    return Array.from(expanded).join(' ');
+}
+
+function highlightText(text,searchTerms){
+    if(!searchTerms||searchTerms.length===0)return text;
+    const stopWords=['a','an','the','or','and','on','in','at','to','for','of','is','are'];
+    const termsToHighlight=searchTerms.filter(term=>!stopWords.includes(term.toLowerCase())&&term.length>1);
+    let result=text;
+    termsToHighlight.forEach(term=>{
+        if(term.length<2)return;
+        const escapedTerm = term.replace(/[.*+?^${}()|[\]\\]/g, '\\                    <button type="submit" style="padding:14px 28px;background:linear-gradient(135deg, #06b6d4, #0ea5e9);');
+        const regex=new RegExp(`(${escapedTerm})`,'gi');
+        result=result.replace(regex,'<span class="highlight">$1</span>');
+    });
+    return result;
+}
+
+function intelligentSearch(query){
+    if(!query)return faqData;
+    const originalQuery=query;
+    const expandedQuery=expandSearchQuery(query);
+    const stopWords=['a','an','the','or','and','on','in','at','to','for','of','is','are'];
+    const searchTerms=query.toLowerCase().split(/\s+/).filter(w=>w.length>1&&!stopWords.includes(w));
+    const fuse=new Fuse(faqData,{
+        keys:[{name:'question',weight:0.45},{name:'keywords',weight:0.45},{name:'answer',weight:0.1}],
+        threshold:0.45,
+        includeScore:true,
+        ignoreLocation:true,
+        minMatchCharLength:2,
+        distance:150,
+        useExtendedSearch:true
+    });
+    let results=fuse.search(expandedQuery);
+    if(results.length<3){
+        const altResults=fuse.search(originalQuery);
+        results=[...results,...altResults].filter((v,i,a)=>a.findIndex(t=>t.item.id===v.item.id)===i);
+    }
+    results=results.map(r=>({...r.item,score:r.score,searchTerms:searchTerms}));
+    results.forEach(result=>{
+        let bonusScore=0;
+        const questionLower=result.question.toLowerCase();
+        const keywordsLower=result.keywords.toLowerCase();
+        const answerLower=result.answer.replace(/<[^>]*>/g,'').toLowerCase();
+        if(questionLower.includes(originalQuery.toLowerCase())){
+            bonusScore-=0.5;
+        }
+        if(keywordsLower.includes(originalQuery.toLowerCase())){
+            bonusScore-=0.4;
+        }
+        searchTerms.forEach((term,index)=>{
+            const isImportantTerm=term.length>4||['slide','remote'].includes(term);
+            const multiplier=isImportantTerm?1.5:1.0;
+            const positionBonus=index===0?1.2:1.0;
+            if(questionLower.includes(term)){
+                bonusScore-=0.25*multiplier*positionBonus;
+            }
+            if(keywordsLower.includes(term)){
+                bonusScore-=0.2*multiplier*positionBonus;
+            }
+            const answerMatches=(answerLower.match(new RegExp('\\b'+term+'\\b','g'))||[]).length;
+            bonusScore-=answerMatches*0.04;
+        });
+        if(result.pinned)bonusScore-=0.12;
+        const allTermsInQuestion=searchTerms.every(term=>questionLower.includes(term));
+        if(allTermsInQuestion)bonusScore-=0.4;
+        const allTermsInKeywords=searchTerms.every(term=>keywordsLower.includes(term));
+        if(allTermsInKeywords)bonusScore-=0.35;
+        result.score+=bonusScore;
+    });
+    results.sort((a,b)=>a.score-b.score);
+    return results;
+}
 
 let suggestionTimeout;
-function showSuggestions(query){clearTimeout(suggestionTimeout);if(!query||query.length<2){document.getElementById('suggestionsDropdown').classList.remove('active');return;}suggestionTimeout=setTimeout(()=>{const results=intelligentSearch(query).slice(0,5);const dropdown=document.getElementById('suggestionsDropdown');if(results.length===0){dropdown.classList.remove('active');return;}dropdown.innerHTML=results.map((faq,index)=>{const cleanAnswer=faq.answer.replace(/<\/?(h3|ol|ul|li|p|strong)[^>]*>/gi,' ').replace(/<[^>]*>/g,'').replace(/\s+/g,' ').trim();const preview=cleanAnswer.substring(0,80)+'...';const highlightedQuestion=highlightText(faq.question,faq.searchTerms);return`<div class="suggestion-item" data-index="${index}" data-id="${faq.id}"><div class="suggestion-question">${highlightedQuestion}</div><div class="suggestion-preview">${preview}</div><span class="suggestion-category">${faq.category}</span></div>`;}).join('');dropdown.classList.add('active');dropdown.querySelectorAll('.suggestion-item').forEach(item=>{item.addEventListener('click',()=>{const faqId=parseInt(item.dataset.id);const faq=faqData.find(f=>f.id===faqId);if(faq){document.getElementById('searchBar').value=faq.question;currentSearch=faq.question;saveRecentSearch(query);renderAll();dropdown.classList.remove('active');setTimeout(()=>{const faqElement=document.querySelector(`.faq-item[data-id="${faqId}"]`);if(faqElement){faqElement.scrollIntoView({behavior:'smooth',block:'center'});faqElement.click();}},100);}});});},200);}
+function showSuggestions(query){
+    clearTimeout(suggestionTimeout);
+    if(!query||query.length<2){
+        document.getElementById('suggestionsDropdown').classList.remove('active');
+        return;
+    }
+    suggestionTimeout=setTimeout(()=>{
+        const results=intelligentSearch(query).slice(0,5);
+        const dropdown=document.getElementById('suggestionsDropdown');
+        if(results.length===0){
+            dropdown.classList.remove('active');
+            return;
+        }
+        dropdown.innerHTML='';
+        results.forEach((faq)=>{
+            const cleanAnswer=faq.answer.replace(/<\/?(h3|ol|ul|li|p|strong)[^>]*>/gi,' ').replace(/<[^>]*>/g,'').replace(/\s+/g,' ').trim();
+            const preview=cleanAnswer.substring(0,80)+'...';
+            const highlightedQuestion=highlightText(faq.question,faq.searchTerms||[]);
+            
+            const item = document.createElement('div');
+            item.className = 'suggestion-item';
+            item.dataset.id = faq.id;
+            
+            const questionDiv = document.createElement('div');
+            questionDiv.className = 'suggestion-question';
+            questionDiv.innerHTML = highlightedQuestion;
+            
+            const previewDiv = document.createElement('div');
+            previewDiv.className = 'suggestion-preview';
+            previewDiv.textContent = preview;
+            
+            const categorySpan = document.createElement('span');
+            categorySpan.className = 'suggestion-category';
+            categorySpan.textContent = faq.category;
+            
+            item.appendChild(questionDiv);
+            item.appendChild(previewDiv);
+            item.appendChild(categorySpan);
+            
+            item.addEventListener('click',()=>{
+                document.getElementById('searchBar').value=faq.question;
+                currentSearch=faq.question;
+                saveRecentSearch(query);
+                renderAll();
+                dropdown.classList.remove('active');
+                setTimeout(()=>{
+                    const faqElement=document.querySelector(`.faq-item[data-id="${faq.id}"]`);
+                    if(faqElement){
+                        faqElement.scrollIntoView({behavior:'smooth',block:'center'});
+                        faqElement.click();
+                    }
+                },100);
+            });
+            
+            dropdown.appendChild(item);
+        });
+        dropdown.classList.add('active');
+    },300);
+}
 
 let currentCategory='all';
 let currentSearch='';
 
-function convertToCheckboxes(htmlContent){const parser=new DOMParser();const doc=parser.parseFromString(htmlContent,'text/html');doc.querySelectorAll('ol li, ul li').forEach((li,index)=>{const checkbox=document.createElement('input');checkbox.type='checkbox';checkbox.id=`step-${Date.now()}-${index}`;const label=document.createElement('label');label.htmlFor=checkbox.id;label.innerHTML=li.innerHTML;const wrapper=document.createElement('div');wrapper.className='step-checkbox';wrapper.appendChild(checkbox);wrapper.appendChild(label);checkbox.addEventListener('change',(e)=>{if(e.target.checked){wrapper.classList.add('completed');}else{wrapper.classList.remove('completed');}});li.parentNode.replaceChild(wrapper,li);});return doc.body.innerHTML;}
+function convertToCheckboxes(htmlContent){
+    const parser=new DOMParser();
+    const doc=parser.parseFromString(htmlContent,'text/html');
+    doc.querySelectorAll('ol li, ul li').forEach((li,index)=>{
+        const checkbox=document.createElement('input');
+        checkbox.type='checkbox';
+        checkbox.id=`step-${Date.now()}-${index}`;
+        const label=document.createElement('label');
+        label.htmlFor=checkbox.id;
+        label.innerHTML=li.innerHTML;
+        const wrapper=document.createElement('div');
+        wrapper.className='step-checkbox';
+        wrapper.appendChild(checkbox);
+        wrapper.appendChild(label);
+        checkbox.addEventListener('change',(e)=>{
+            if(e.target.checked){
+                wrapper.classList.add('completed');
+            }else{
+                wrapper.classList.remove('completed');
+            }
+        });
+        li.parentNode.replaceChild(wrapper,li);
+    });
+    return doc.body.innerHTML;
+}
 
-function renderFAQ(faq,container){const item=document.createElement('div');item.className=`faq-item ${faq.pinned?'pinned':''}`;item.dataset.id=faq.id;const cleanAnswer=faq.answer.replace(/<\/?(h3|ol|ul|li|p|strong)[^>]*>/gi,' ').replace(/<[^>]*>/g,'').replace(/\s+/g,' ').trim();const preview=cleanAnswer.substring(0,120)+'...';const highlightedQuestion=faq.searchTerms?highlightText(faq.question,faq.searchTerms):faq.question;const highlightedPreview=faq.searchTerms?highlightText(preview,faq.searchTerms):preview;const answerWithCheckboxes=convertToCheckboxes(faq.answer);item.innerHTML=`<div class="faq-question"><span>${highlightedQuestion}</span><span class="expand-icon">▼</span></div><span class="faq-category">${faq.category}</span><div class="faq-preview">${highlightedPreview}</div><div class="faq-answer">${answerWithCheckboxes}<div class="feedback-section"><div class="feedback-question">Did this solve your problem?</div><div class="feedback-buttons"><button class="feedback-btn yes">✓ Yes, it worked!</button><button class="feedback-btn no">✗ No, still broken</button></div><div class="feedback-thanks"></div></div></div>`;item.onclick=(e)=>{if(e.target.closest('.step-checkbox')||e.target.closest('.feedback-section')){return;}const isExpanded=item.classList.contains('expanded');document.querySelectorAll('.faq-answer').forEach(a=>a.classList.remove('expanded'));document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('expanded'));if(!isExpanded){item.classList.add('expanded');item.querySelector('.faq-answer').classList.add('expanded');}};const yesBtn=item.querySelector('.feedback-btn.yes');const noBtn=item.querySelector('.feedback-btn.no');const thanksMsg=item.querySelector('.feedback-thanks');const feedbackBtns=item.querySelector('.feedback-buttons');yesBtn.onclick=(e)=>{e.stopPropagation();feedbackBtns.style.display='none';thanksMsg.textContent='✓ Great! Glad we could help!';thanksMsg.classList.add('show');};noBtn.onclick=(e)=>{e.stopPropagation();feedbackBtns.style.display='none';thanksMsg.textContent='🔧 Please report this issue so we can improve!';thanksMsg.style.color='#fbbf24';thanksMsg.classList.add('show');setTimeout(()=>{document.getElementById('reportBtn').click();},1500);};container.appendChild(item);}
+function renderFAQ(faq,container){
+    const item=document.createElement('div');
+    item.className=`faq-item ${faq.pinned?'pinned':''}`;
+    item.dataset.id=faq.id;
+    const cleanAnswer=faq.answer.replace(/<\/?(h3|ol|ul|li|p|strong)[^>]*>/gi,' ').replace(/<[^>]*>/g,'').replace(/\s+/g,' ').trim();
+    const preview=cleanAnswer.substring(0,120)+'...';
+    const highlightedQuestion=faq.searchTerms?highlightText(faq.question,faq.searchTerms):faq.question;
+    const highlightedPreview=faq.searchTerms?highlightText(preview,faq.searchTerms):preview;
+    const answerWithCheckboxes=convertToCheckboxes(faq.answer);
+    item.innerHTML=`
+        <div class="faq-question">
+            <span>${highlightedQuestion}</span>
+            <span class="expand-icon">▼</span>
+        </div>
+        <span class="faq-category">${faq.category}</span>
+        <div class="faq-preview">${highlightedPreview}</div>
+        <div class="faq-answer">
+            ${answerWithCheckboxes}
+            <div class="feedback-section">
+                <div class="feedback-question">Did this solve your problem?</div>
+                <div class="feedback-buttons">
+                    <button class="feedback-btn yes">✓ Yes, it worked!</button>
+                    <button class="feedback-btn no">✗ No, still broken</button>
+                </div>
+                <div class="feedback-thanks"></div>
+            </div>
+        </div>
+    `;
+    
+    item.onclick=(e)=>{
+        if(e.target.closest('.step-checkbox')||e.target.closest('.feedback-section')){
+            return;
+        }
+        const isExpanded=item.classList.contains('expanded');
+        document.querySelectorAll('.faq-answer').forEach(a=>a.classList.remove('expanded'));
+        document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('expanded'));
+        if(!isExpanded){
+            item.classList.add('expanded');
+            item.querySelector('.faq-answer').classList.add('expanded');
+        }
+    };
+    
+    const yesBtn=item.querySelector('.feedback-btn.yes');
+    const noBtn=item.querySelector('.feedback-btn.no');
+    const thanksMsg=item.querySelector('.feedback-thanks');
+    const feedbackBtns=item.querySelector('.feedback-buttons');
+    
+    yesBtn.addEventListener('click',(e)=>{
+        e.stopPropagation();
+        feedbackBtns.style.display='none';
+        thanksMsg.textContent='✓ Great! Glad we could help!';
+        thanksMsg.classList.add('show');
+    });
+    
+    noBtn.addEventListener('click',(e)=>{
+        e.stopPropagation();
+        feedbackBtns.style.display='none';
+        thanksMsg.textContent='🔧 Please report this issue so we can improve!';
+        thanksMsg.style.color='#fbbf24';
+        thanksMsg.classList.add('show');
+        setTimeout(()=>{
+            document.getElementById('reportBtn').click();
+        },1500);
+    });
+    
+    container.appendChild(item);
+}
 
-function renderAll(){document.getElementById('pinnedList').innerHTML='';document.getElementById('faqList').innerHTML='';document.getElementById('suggestionsDropdown').classList.remove('active');let filtered=faqData;if(currentCategory!=='all'){filtered=faqData.filter(f=>f.category===currentCategory);}if(currentSearch){filtered=intelligentSearch(currentSearch);document.getElementById('pinnedSection').style.display='none';document.getElementById('emergencyActions').style.display='none';if(filtered.length===0){document.getElementById('noResults').style.display='block';document.getElementById('faqList').style.display='none';document.getElementById('searchStats').textContent='';return;}else{document.getElementById('noResults').style.display='none';document.getElementById('faqList').style.display='flex';document.getElementById('searchStats').textContent=`Found ${filtered.length} result${filtered.length!==1?'s':''}`;}filtered.forEach(f=>renderFAQ(f,document.getElementById('faqList')));saveRecentSearch(currentSearch);}else{document.getElementById('pinnedSection').style.display='block';document.getElementById('emergencyActions').style.display='grid';document.getElementById('noResults').style.display='none';document.getElementById('faqList').style.display='flex';document.getElementById('searchStats').textContent='';const pinned=filtered.filter(f=>f.pinned);pinned.forEach(f=>renderFAQ(f,document.getElementById('pinnedList')));filtered.filter(f=>!f.pinned).forEach(f=>renderFAQ(f,document.getElementById('faqList')));}}
+function renderAll(){
+    document.getElementById('pinnedList').innerHTML='';
+    document.getElementById('faqList').innerHTML='';
+    document.getElementById('suggestionsDropdown').classList.remove('active');
+    let filtered=faqData;
+    if(currentCategory!=='all'){
+        filtered=faqData.filter(f=>f.category===currentCategory);
+    }
+    if(currentSearch){
+        filtered=intelligentSearch(currentSearch);
+        document.getElementById('pinnedSection').style.display='none';
+        document.getElementById('emergencyActions').style.display='none';
+        if(filtered.length===0){
+            document.getElementById('noResults').style.display='block';
+            document.getElementById('faqList').style.display='none';
+            document.getElementById('searchStats').textContent='';
+            return;
+        }else{
+            document.getElementById('noResults').style.display='none';
+            document.getElementById('faqList').style.display='flex';
+            document.getElementById('searchStats').textContent=`Found ${filtered.length} result${filtered.length!==1?'s':''}`;
+        }
+        filtered.forEach(f=>renderFAQ(f,document.getElementById('faqList')));
+        saveRecentSearch(currentSearch);
+    }else{
+        document.getElementById('pinnedSection').style.display='block';
+        document.getElementById('emergencyActions').style.display='grid';
+        document.getElementById('noResults').style.display='none';
+        document.getElementById('faqList').style.display='flex';
+        document.getElementById('searchStats').textContent='';
+        const pinned=filtered.filter(f=>f.pinned);
+        pinned.forEach(f=>renderFAQ(f,document.getElementById('pinnedList')));
+        filtered.filter(f=>!f.pinned).forEach(f=>renderFAQ(f,document.getElementById('faqList')));
+    }
+}
 
 const searchBar=document.getElementById('searchBar');
 const clearSearchBtn=document.getElementById('clearSearch');
 const searchIcon=document.getElementById('searchIcon');
 
-searchBar.addEventListener('input',e=>{currentSearch=e.target.value.trim();if(e.target.value){clearSearchBtn.classList.add('active');searchIcon.style.display='none';}else{clearSearchBtn.classList.remove('active');searchIcon.style.display='block';}showSuggestions(currentSearch);if(!currentSearch)renderAll();});
+searchBar.addEventListener('input',e=>{
+    currentSearch=e.target.value.trim();
+    if(e.target.value){
+        clearSearchBtn.classList.add('active');
+        searchIcon.style.display='none';
+    }else{
+        clearSearchBtn.classList.remove('active');
+        searchIcon.style.display='block';
+    }
+    showSuggestions(currentSearch);
+    if(!currentSearch)renderAll();
+});
 
-searchBar.addEventListener('keydown',e=>{if(e.key==='Enter'){renderAll();}});
+searchBar.addEventListener('keydown',e=>{
+    if(e.key==='Enter'){
+        renderAll();
+    }
+});
 
-clearSearchBtn.addEventListener('click',()=>{searchBar.value='';currentSearch='';clearSearchBtn.classList.remove('active');searchIcon.style.display='block';renderAll();searchBar.focus();});
+const clearHandler = () => {
+    searchBar.value='';
+    currentSearch='';
+    clearSearchBtn.classList.remove('active');
+    searchIcon.style.display='block';
+    document.getElementById('pinnedSection').style.display='block';
+    document.getElementById('emergencyActions').style.display='grid';
+    renderAll();
+    searchBar.focus();
+};
 
-document.addEventListener('click',e=>{if(!e.target.closest('.search-container')){document.getElementById('suggestionsDropdown').classList.remove('active');}});
+clearSearchBtn.addEventListener('click', clearHandler);
+clearSearchBtn.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        clearHandler();
+    }
+});
 
-document.querySelectorAll('.category-btn').forEach(btn=>btn.onclick=()=>{document.querySelectorAll('.category-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');currentCategory=btn.dataset.category;document.getElementById('searchBar').value='';currentSearch='';renderAll();});
+document.addEventListener('click',e=>{
+    if(!e.target.closest('.search-container')){
+        document.getElementById('suggestionsDropdown').classList.remove('active');
+    }
+});
 
-document.querySelectorAll('.emergency-btn').forEach(btn=>{btn.addEventListener('click',()=>{const issueType=btn.dataset.issue;const faqId=emergencyMap[issueType];const faq=faqData.find(f=>f.id===faqId);if(faq){document.getElementById('searchBar').value=faq.question;currentSearch=faq.question;renderAll();setTimeout(()=>{const faqElement=document.querySelector(`.faq-item[data-id="${faqId}"]`);if(faqElement){faqElement.scrollIntoView({behavior:'smooth',block:'center'});faqElement.click();}},100);}});});
+document.querySelectorAll('.category-btn').forEach(btn=>btn.onclick=()=>{
+    document.querySelectorAll('.category-btn').forEach(b=>{
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
+    });
+    btn.classList.add('active');
+    btn.setAttribute('aria-pressed', 'true');
+    currentCategory=btn.dataset.category;
+    document.getElementById('searchBar').value='';
+    currentSearch='';
+    renderAll();
+});
 
-document.getElementById('reportBtn').onclick=e=>{e.preventDefault();document.getElementById('contactModal').style.display='block';};
+document.querySelectorAll('.emergency-btn').forEach(btn=>{
+    const clickHandler = ()=>{
+        const issueType=btn.dataset.issue;
+        const faqId=emergencyMap[issueType];
+        const faq=faqData.find(f=>f.id===faqId);
+        if(faq){
+            document.getElementById('searchBar').value=faq.question;
+            currentSearch=faq.question;
+            renderAll();
+            setTimeout(()=>{
+                const faqElement=document.querySelector(`.faq-item[data-id="${faqId}"]`);
+                if(faqElement){
+                    faqElement.scrollIntoView({behavior:'smooth',block:'center'});
+                    faqElement.click();
+                }
+            },100);
+        }
+    };
+    btn.addEventListener('click', clickHandler);
+    btn.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            clickHandler();
+        }
+    });
+});
 
-document.getElementById('cancelBtn').onclick=()=>{document.getElementById('contactModal').style.display='none';};
+document.getElementById('reportBtn').onclick=e=>{
+    e.preventDefault();
+    const modal = document.getElementById('contactModal');
+    modal.style.display='block';
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    const firstInput = modal.querySelector('input, textarea, button');
+    if(firstInput) firstInput.focus();
+};
 
-document.getElementById('contactModal').onclick=e=>{if(e.target.id==='contactModal'){document.getElementById('contactModal').style.display='none';}};
+document.getElementById('cancelBtn').onclick=()=>{
+    document.getElementById('contactModal').style.display='none';
+    document.getElementById('reportBtn').focus();
+};
 
-document.getElementById('contactForm').onsubmit=async e=>{e.preventDefault();const res=await fetch(e.target.action,{method:'POST',body:new FormData(e.target),headers:{'Accept':'application/json'}});if(res.ok){document.getElementById('contactForm').style.display='none';document.getElementById('successMessage').style.display='block';setTimeout(()=>document.getElementById('contactModal').style.display='none',3000);}};
+document.getElementById('contactModal').onclick=e=>{
+    if(e.target.id==='contactModal'){
+        document.getElementById('contactModal').style.display='none';
+        document.getElementById('reportBtn').focus();
+    }
+};
+
+document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape') {
+        const modal = document.getElementById('contactModal');
+        if(modal.style.display === 'block') {
+            modal.style.display = 'none';
+            document.getElementById('reportBtn').focus();
+        }
+    }
+});
+
+document.getElementById('contactForm').onsubmit=async e=>{
+    e.preventDefault();
+    try {
+        const res=await fetch(e.target.action,{
+            method:'POST',
+            body:new FormData(e.target),
+            headers:{'Accept':'application/json'}
+        });
+        if(res.ok){
+            document.getElementById('contactForm').style.display='none';
+            document.getElementById('successMessage').style.display='block';
+            setTimeout(()=>{
+                document.getElementById('contactModal').style.display='none';
+                document.getElementById('reportBtn').focus();
+            },3000);
+        } else {
+            alert('Failed to submit. Please try again or contact the A/V team directly.');
+        }
+    } catch(err) {
+        console.error('Form submission error:', err);
+        alert('Network error. Please check your connection and try again.');
+    }
+};
 
 loadRecentSearches();
 renderRecentSearches();
