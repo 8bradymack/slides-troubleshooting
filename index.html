@@ -645,55 +645,60 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.6.2/fuse.min.js"></script>
     <script>
 const faqData=[
-{id:1,question:"Complete ProPresenter Setup",category:"Setup",pinned:true,keywords:"startup setup computer projector turn on mac mini displaylink",answer:"<h3>Step-by-Step:</h3><ol><li>Turn on the projector (remote or wall switch)</li><li>Turn on Mac Mini</li><li>Log in to Mac Mini</li><li><strong>Launch DisplayLink Manager FIRST</strong> (wait 10-15 seconds)</li><li><strong>Launch ProPresenter SECOND</strong></li><li>Check display outputs (Screen Configuration)</li><li>Verify HDMI Extender is powered on</li><li>Check all TVs are on correct input</li><li>Test clicker/remote batteries</li><li>Load first slide and test</li></ol><h3>⚠️ CRITICAL:</h3><p><strong>DisplayLink MUST launch before ProPresenter!</strong> If you launch ProPresenter first, it won't see the virtual displays for confidence monitor and livestream overlay.</p>"},
-{id:2,question:"Screens show nothing / blank display",category:"Display",pinned:true,keywords:"blank black no display nothing showing projector screen tvs hdmi extender",answer:"<h3>Fix Blank Display:</h3><ol><li>Check projector/TVs are ON (look for power light)</li><li>Verify Mac Mini is awake (not in sleep mode)</li><li>Check HDMI Extender power (both sender and receiver)</li><li>In ProPresenter: Check 'Enable Output' is ON</li><li>Try toggling output OFF then ON</li><li>Check correct input selected on each TV</li></ol><h3>If ALL TVs are blank:</h3><ul><li>HDMI Extender issue - check power on both ends</li><li>Check HDMI cable from Mac Mini to extender sender</li><li>Power cycle the extender (unplug 10 seconds, plug back in)</li></ul><h3>If ONE TV is blank:</h3><ul><li>Check that specific TV's input source</li><li>Check HDMI cable at that TV</li><li>Try different HDMI port on TV</li></ul>"},
+{id:1,question:"Complete ProPresenter Setup",category:"Setup",pinned:true,keywords:"startup setup turn on mac mini displaylink sunday morning automation",answer:"<h3>Sunday Morning Setup:</h3><ol><li>Turn on all TVs (including confidence monitor)</li><li>Turn on Mac Mini and log in</li><li>Click <strong>Sunday Setup</strong> automation app (it will automatically:<ul><li>Open Google Drive folder for playlists</li><li>Launch DisplayLink Manager</li><li>Launch ProPresenter</li></ul></li><li>Download the playlist and message from the open Google Drive folder</li><li>Combine the playlist and message files in ProPresenter</li><li>Run through the songs with the band</li><li>Verify HDMI Extender is powered on</li><li>Check all TVs showing slides correctly</li><li>Test clicker/remote batteries</li></ol><h3>⚠️ IMPORTANT:</h3><p><strong>The Sunday Setup app launches DisplayLink before ProPresenter automatically!</strong> This ensures confidence monitor and Camera 4 livestream overlay work properly.</p>"},
+{id:2,question:"Screens show nothing / blank display",category:"Display",pinned:true,keywords:"blank black no display nothing showing screen tvs hdmi extender",answer:"<h3>Fix Blank Display:</h3><ol><li>Check all TVs are ON (look for power light)</li><li>Verify Mac Mini is awake (not in sleep mode)</li><li>Check HDMI Extender power (both sender and receiver)</li><li>In ProPresenter: Check 'Enable Output' is ON</li><li>Try toggling output OFF then ON</li><li>Check correct input selected on each TV</li></ol><h3>If ALL TVs are blank:</h3><ul><li>HDMI Extender issue - check power on both ends</li><li>Check HDMI cable from Mac Mini to extender sender</li><li>Power cycle the extender (unplug 10 seconds, plug back in)</li></ul><h3>If ONE TV is blank:</h3><ul><li>Check that specific TV's input source</li><li>Check HDMI cable at that TV</li><li>Try different HDMI port on TV</li></ul>"},
 {id:3,question:"Slides going to wrong screen",category:"Display",pinned:true,keywords:"wrong screen laptop monitor output display configuration confidence livestream",answer:"<h3>Fix Wrong Screen Output:</h3><ol><li>Open ProPresenter Preferences</li><li>Go to 'Screens' or 'Screen Configuration'</li><li>Verify displays:<ul><li><strong>Audience:</strong> HDMI Out (goes to TVs via extender)</li><li><strong>Confidence:</strong> DisplayLink virtual display #1</li><li><strong>Livestream (Camera 4):</strong> DisplayLink virtual display #2</li></ul></li><li>Drag screens to correct assignments</li><li>Click 'Apply' or 'OK'</li><li>Test with a slide</li></ol><h3>If DisplayLink screens missing:</h3><ul><li>DisplayLink wasn't launched first!</li><li>Quit ProPresenter</li><li>Launch DisplayLink, wait 15 seconds</li><li>Launch ProPresenter</li><li>Reconfigure screens</li></ul>"},
 {id:4,question:"Clicker / Remote not working",category:"Remote Control",pinned:true,keywords:"clicker remote not advancing batteries usb receiver wireless presenter",answer:"<h3>Fix Clicker Not Working:</h3><ol><li><strong>Check batteries first!</strong> Replace if old</li><li>Look for USB receiver plugged into Mac Mini</li><li>Make sure receiver is visible (not blocked)</li><li>Try pressing any button to 'wake' the remote</li><li>Check LED lights on remote when pressing buttons</li></ol><h3>If still not working:</h3><ul><li>Unplug USB receiver, wait 5 seconds, plug back in</li><li>Turn remote OFF then ON</li><li>Try re-pairing (hold pairing button on receiver + remote)</li><li>Test in a different USB port</li></ul><h3>Backup:</h3><p>Use arrow keys on keyboard (→ for next slide, ← for previous)</p>"},
 {id:5,question:"Lyrics not showing / black box instead",category:"Content",pinned:true,keywords:"lyrics words text missing black box blank song overlay camera 4 displaylink",answer:"<h3>Fix Missing Lyrics:</h3><ol><li>Check you selected the correct slide (not blank)</li><li>Look at preview - do you see lyrics there?</li><li>Check text isn't white-on-white or hidden</li><li>Verify layer isn't turned off</li><li>Try re-triggering the slide</li></ol><h3>If preview shows lyrics but screen doesn't:</h3><ul><li>Check output is enabled</li><li>Verify correct screen configuration</li><li>Try restarting ProPresenter</li></ul><h3>If livestream overlay (Camera 4) not working:</h3><ul><li>DisplayLink not running!</li><li>Quit ProPresenter</li><li>Launch DisplayLink FIRST</li><li>Then launch ProPresenter</li><li>Check Camera 4 in livestream software</li></ul>"},
-{id:6,question:"ProPresenter won't launch / crashes",category:"ProPresenter",pinned:true,keywords:"crash wont open launch frozen stuck not starting mac mini",answer:"<h3>Fix ProPresenter Not Opening:</h3><ol><li>Wait 30 seconds (may be loading)</li><li>Check Activity Monitor - force quit if frozen</li><li>Try launching again</li><li>Restart the Mac Mini</li><li>Check for macOS updates</li></ol><h3>If crashes immediately:</h3><ul><li>Hold SHIFT while opening ProPresenter (safe mode)</li><li>Clear preferences/cache</li><li>Check ProPresenter is up to date</li><li>Verify license is activated</li></ul><h3>⚠️ Remember:</h3><p>Always launch DisplayLink BEFORE ProPresenter!</p>"},
+{id:6,question:"ProPresenter won't launch / crashes",category:"ProPresenter",pinned:true,keywords:"crash wont open launch frozen stuck not starting mac mini",answer:"<h3>Fix ProPresenter Not Opening:</h3><ol><li>Wait 30 seconds (may be loading)</li><li>Check Activity Monitor - force quit if frozen</li><li>Try launching again</li><li>Restart the Mac Mini</li><li>Check for macOS updates</li></ol><h3>If crashes immediately:</h3><ul><li>Hold SHIFT while opening ProPresenter (safe mode)</li><li>Clear preferences/cache</li><li>Check ProPresenter is up to date</li><li>Verify license is activated</li></ul><h3>⚠️ Remember:</h3><p>Always launch DisplayLink BEFORE ProPresenter! Use the Sunday Setup app to do this automatically.</p>"},
 {id:7,question:"Lobby screen switching issues",category:"Display",pinned:false,keywords:"lobby switch hdmi toggle livestream slides not switching stuck",answer:"<h3>Lobby HDMI Switch:</h3><p>The lobby has an HDMI switch that toggles between:</p><ul><li><strong>Input 1:</strong> Livestream feed</li><li><strong>Input 2:</strong> Direct slides from HDMI extender</li></ul><h3>If switch not working:</h3><ol><li>Check switch has power</li><li>Press button firmly (may need 2-3 second hold)</li><li>Check indicator light shows active input</li><li>Try unplugging switch for 10 seconds</li></ol><h3>If stuck on one input:</h3><ul><li>Power cycle the switch</li><li>Check both HDMI cables are firmly connected</li><li>Try pressing button multiple times</li></ul>"},
-{id:8,question:"DisplayLink / Camera 4 not working",category:"Display",pinned:false,keywords:"displaylink camera 4 no signal desktop mac mini virtual display confidence livestream overlay",answer:"<h3>⚠️ MOST COMMON ISSUE!</h3><p><strong>DisplayLink MUST launch BEFORE ProPresenter!</strong></p><h3>If Camera 4 shows no signal:</h3><ol><li>Quit ProPresenter completely</li><li>Quit DisplayLink</li><li>Launch DisplayLink Manager</li><li>Wait 15 seconds for virtual displays to initialize</li><li>Launch ProPresenter</li><li>Go to Screen Configuration</li><li>Assign DisplayLink displays correctly</li></ol><h3>If shows Mac Mini desktop:</h3><p>Same fix as above - wrong launch order!</p><h3>Confidence monitor also blank?</h3><p>Same issue - it's also on DisplayLink. Follow same steps.</p>"},
+{id:8,question:"DisplayLink / Camera 4 not working",category:"Display",pinned:false,keywords:"displaylink camera 4 no signal desktop mac mini virtual display confidence livestream overlay",answer:"<h3>⚠️ MOST COMMON ISSUE!</h3><p><strong>DisplayLink MUST launch BEFORE ProPresenter!</strong></p><h3>If Camera 4 shows no signal:</h3><ol><li>Quit ProPresenter completely</li><li>Quit DisplayLink</li><li>Launch DisplayLink Manager</li><li>Wait 15 seconds for virtual displays to initialize</li><li>Launch ProPresenter</li><li>Go to Screen Configuration</li><li>Assign DisplayLink displays correctly</li></ol><h3>If shows Mac Mini desktop:</h3><p>Same fix as above - wrong launch order!</p><h3>Confidence monitor also blank?</h3><p>Same issue - it's also on DisplayLink. Follow same steps.</p><h3>💡 TIP:</h3><p>Use the <strong>Sunday Setup</strong> automation app! It launches DisplayLink before ProPresenter automatically.</p>"},
 {id:9,question:"HDMI Extender not working",category:"Display",pinned:false,keywords:"hdmi extender ethernet not working tvs no signal power",answer:"<h3>Fix HDMI Extender:</h3><ol><li>Check power on SENDER (by Mac Mini)</li><li>Check power on RECEIVER (by TVs)</li><li>Look for link lights on both units</li><li>Check ethernet cable between sender/receiver</li><li>Power cycle BOTH units (unplug 10 seconds)</li></ol><h3>⚠️ WARNING:</h3><p><strong>Power cycling will cut video to ALL TVs temporarily!</strong></p><h3>If TVs still blank after power cycle:</h3><ul><li>Check HDMI from Mac Mini to sender</li><li>Check HDMI from receiver to TV splitter</li><li>Try different HDMI cable</li><li>Check Mac Mini display output settings</li></ul>"},
-{id:10,question:"Confidence monitor not showing",category:"Display",pinned:false,keywords:"confidence stage display monitor pastor speaker notes not working displaylink",answer:"<h3>Fix Confidence Monitor:</h3><ol><li>Check monitor is powered on</li><li>Check HDMI/cable connection</li><li>Verify DisplayLink is running</li><li>Open ProPresenter Screen Configuration</li><li>Assign confidence display to DisplayLink virtual display #1</li><li>Enable Stage Display in ProPresenter</li></ol><h3>If still not working:</h3><ul><li>Quit ProPresenter</li><li>Quit DisplayLink</li><li>Launch DisplayLink FIRST (wait 15 seconds)</li><li>Launch ProPresenter SECOND</li><li>Reconfigure screen assignments</li></ul><h3>Confidence display options:</h3><ul><li>Current + Next slide</li><li>Notes + Current slide</li><li>Clock + Slides</li></ul>"},
+{id:10,question:"Confidence monitor not showing",category:"Display",pinned:false,keywords:"confidence stage display monitor pastor speaker notes not working displaylink",answer:"<h3>Fix Confidence Monitor:</h3><ol><li>Check monitor is powered on</li><li>Check HDMI/cable connection</li><li>Verify DisplayLink is running</li><li>Open ProPresenter Screen Configuration</li><li>Assign confidence display to DisplayLink virtual display #1</li><li>Enable Stage Display in ProPresenter</li></ol><h3>If still not working:</h3><ul><li>Quit ProPresenter</li><li>Quit DisplayLink</li><li>Launch DisplayLink FIRST (wait 15 seconds)</li><li>Launch ProPresenter SECOND</li><li>Reconfigure screen assignments</li></ul><h3>💡 TIP:</h3><p>Use the <strong>Sunday Setup</strong> app to launch everything in the correct order automatically!</p><h3>Confidence display options:</h3><ul><li>Current + Next slide</li><li>Notes + Current slide</li><li>Clock + Slides</li></ul>"},
 {id:11,question:"One TV not showing signal",category:"Display",pinned:false,keywords:"single tv no signal one screen blank individual hdmi input",answer:"<h3>Fix Single TV No Signal:</h3><ol><li>Check which HDMI port has cable (back of TV)</li><li>Press Input/Source on TV remote</li><li>Select matching HDMI (1, 2, or 3)</li><li>Wait a few seconds for signal</li></ol><h3>If still no signal:</h3><ul><li>Check HDMI cable firmly plugged in both ends</li><li>Try different HDMI port on TV</li><li>Test with different HDMI cable</li><li>Check if other TVs are working (rules out extender)</li></ul><h3>TV-specific issue?</h3><ul><li>Power cycle that TV</li><li>Check TV isn't in sleep/standby mode</li></ul>"},
 {id:12,question:"All TVs showing no signal",category:"Display",pinned:false,keywords:"all tvs blank no signal multiple screens hdmi extender",answer:"<h3>If ALL TVs are blank:</h3><p><strong>This is an HDMI Extender or Mac Mini output issue.</strong></p><ol><li>Check Mac Mini is awake and on</li><li>Verify ProPresenter output is enabled</li><li>Check HDMI Extender power (sender + receiver)</li><li>Look for link lights on extender units</li><li>Check HDMI cable from Mac Mini to extender sender</li></ol><h3>Power cycle extender:</h3><ol><li>Unplug power from sender (by Mac Mini)</li><li>Unplug power from receiver (by TVs)</li><li>Wait 10 seconds</li><li>Plug sender back in first</li><li>Plug receiver back in</li><li>Wait for link lights to establish</li></ol>"},
-{id:13,question:"Projector won't turn on",category:"Display",pinned:false,keywords:"projector power dead wont turn on remote wall switch",answer:"<h3>Fix Projector Won't Turn On:</h3><ol><li>Try wall switch if available</li><li>Check remote batteries</li><li>Point remote directly at projector sensor</li><li>Hold power button for 3-5 seconds</li><li>Check power cable plugged in</li><li>Look for standby light (orange/red LED)</li></ol><h3>If standby light is on:</h3><ul><li>Projector may be in standby - press power</li><li>May need to warm up (wait 20-30 seconds)</li><li>Look for green light when fully on</li></ul><h3>If no lights at all:</h3><ul><li>Check power strip/outlet</li><li>Try different outlet</li><li>Check circuit breaker</li></ul>"},
-{id:14,question:"Display stretched / wrong aspect ratio",category:"Display",pinned:false,keywords:"stretched squished aspect ratio resolution wide distorted screen",answer:"<h3>Fix Stretched Display:</h3><ol><li>Check projector/TV aspect ratio setting (16:9 vs 4:3)</li><li>Open System Preferences → Displays on Mac Mini</li><li>Select correct resolution for display</li><li>In ProPresenter Screen Configuration, verify output resolution</li><li>Check 'Maintain Aspect Ratio' is enabled</li></ol><h3>Recommended resolutions:</h3><ul><li>1920x1080 (Full HD 16:9) - most common</li><li>1280x720 (HD 16:9)</li><li>1024x768 (4:3) - older projectors</li></ul>"},
+{id:13,question:"Can't download playlist from Google Drive",category:"Content",pinned:false,keywords:"google drive download playlist message file missing sunday setup",answer:"<h3>Fix Download Issues:</h3><ol><li>Check internet connection on Mac Mini</li><li>Verify you're logged into Google Drive</li><li>Look for this week's folder in Drive</li><li>Check files aren't still being uploaded</li><li>Try refreshing the page (⌘+R)</li></ol><h3>If files are missing:</h3><ul><li>Check you're looking at the correct Sunday date</li><li>Contact whoever uploads the playlists</li><li>Check your email for shared links</li></ul><h3>💡 TIP:</h3><p>The <strong>Sunday Setup</strong> app automatically opens the correct Google Drive folder!</p>"},
+{id:14,question:"Display stretched / wrong aspect ratio",category:"Display",pinned:false,keywords:"stretched squished aspect ratio resolution wide distorted screen",answer:"<h3>Fix Stretched Display:</h3><ol><li>Check TV aspect ratio setting (16:9 vs 4:3)</li><li>Open System Preferences → Displays on Mac Mini</li><li>Select correct resolution for display</li><li>In ProPresenter Screen Configuration, verify output resolution</li><li>Check 'Maintain Aspect Ratio' is enabled</li></ol><h3>Recommended resolutions:</h3><ul><li>1920x1080 (Full HD 16:9) - most common</li><li>1280x720 (HD 16:9)</li></ul>"},
 {id:15,question:"Slides advancing too slowly / lag",category:"ProPresenter",pinned:false,keywords:"slow lag delay freeze performance sluggish mac mini",answer:"<h3>Fix Slow Performance:</h3><ol><li>Close other applications on Mac Mini</li><li>Check CPU usage in Activity Monitor</li><li>Reduce slide transitions/effects</li><li>Clear media cache in ProPresenter</li><li>Lower output resolution if possible</li><li>Disable background video if not needed</li></ol><h3>For better performance:</h3><ul><li>Use solid backgrounds instead of videos</li><li>Optimize image sizes before importing</li><li>Keep ProPresenter updated</li><li>Restart Mac Mini before service</li><li>Close Chrome/Safari tabs</li></ul>"},
-{id:16,question:"Can't find saved presentation",category:"Content",pinned:false,keywords:"missing presentation playlist lost saved file cant find",answer:"<h3>Find Missing Presentation:</h3><ol><li>Check recent playlists in ProPresenter</li><li>Look in default save location</li><li>Use Spotlight search (⌘+Space) for presentation name</li><li>Check Finder → Documents → ProPresenter</li><li>Look in cloud storage if syncing</li></ol><h3>Prevention:</h3><ul><li>Always save to a known location</li><li>Name presentations clearly with date</li><li>Back up important presentations weekly</li><li>Use consistent naming convention</li></ul>"},
+{id:16,question:"Can't combine playlist and message",category:"Content",pinned:false,keywords:"combine playlist message merge files propresenter",answer:"<h3>Combine Playlist and Message:</h3><ol><li>Open both files in ProPresenter</li><li>Select all slides from message file (⌘+A)</li><li>Copy slides (⌘+C)</li><li>Go to playlist file</li><li>Click where you want to insert message</li><li>Paste slides (⌘+V)</li></ol><h3>Alternative method:</h3><ul><li>Drag slides from message window into playlist</li><li>Drop them in the correct position</li><li>Save the combined playlist</li></ul><h3>💡 TIP:</h3><p>Make sure message goes in the correct spot in the service order!</p>"},
 {id:17,question:"Text too small on screen",category:"Content",pinned:false,keywords:"text small font size tiny cant read",answer:"<h3>Fix Small Text:</h3><ol><li>Select the slide/text box in ProPresenter</li><li>Increase font size</li><li>Check text scaling settings</li><li>Verify output resolution matches screen</li><li>Use 'Fit to Screen' option if available</li></ol><h3>Best practices:</h3><ul><li>Minimum 36pt font for readability</li><li>Use high contrast (white text on dark background)</li><li>Keep text lines short and simple</li><li>Test from back of room before service</li><li>Remember: TVs are further away than you think!</li></ul>"},
 {id:18,question:"Background video not playing",category:"Content",pinned:false,keywords:"video background not playing frozen stuck media mac mini",answer:"<h3>Fix Video Background:</h3><ol><li>Check video file format (MP4/MOV recommended)</li><li>Verify video isn't corrupted (test in QuickTime)</li><li>Check 'Play Video' option is enabled on slide</li><li>Look for codec issues</li><li>Try re-importing video</li><li>Reduce video quality if file is too large</li></ol><h3>If video lags:</h3><ul><li>Convert to H.264 codec</li><li>Lower resolution (720p usually sufficient)</li><li>Close other applications on Mac Mini</li><li>Check Mac Mini storage isn't full</li></ul>"},
 {id:19,question:"Bible verses not displaying correctly",category:"Content",pinned:false,keywords:"bible scripture verses text formatting reference translation",answer:"<h3>Fix Bible Display:</h3><ol><li>Check Bible module is installed in ProPresenter</li><li>Verify correct translation selected (ESV, NIV, etc)</li><li>Look for verse reference errors</li><li>Check text formatting/template</li><li>Verify verse breaks are correct</li></ol><h3>Common issues:</h3><ul><li>Wrong translation selected</li><li>Verse reference typo (John 3:16 not John 3:161)</li><li>Template needs font size adjustment</li><li>Font color matches background (can't see it)</li></ul>"},
-{id:20,question:"Presentation freezes during service",category:"ProPresenter",pinned:false,keywords:"freeze frozen crash hang stuck during service emergency mac mini",answer:"<h3>If ProPresenter Freezes During Service:</h3><ol><li><strong>Don't panic</strong> - audience may not notice yet</li><li>Try clicking a different slide</li><li>Press ESC to clear current slide</li><li>Press arrow keys to advance</li><li>If totally frozen, check Activity Monitor (⌘+Space, type Activity Monitor)</li><li>Force quit ProPresenter if necessary</li><li>Relaunch immediately</li><li>Load most recent playlist</li></ol><h3>⚠️ Remember after relaunch:</h3><p>You may need to reconfigure displays if DisplayLink was affected</p><h3>Prevention:</h3><ul><li>Close unnecessary apps before service</li><li>Restart Mac Mini weekly</li><li>Keep ProPresenter updated</li><li>Test all media before service</li></ul>"}
+{id:20,question:"Presentation freezes during service",category:"ProPresenter",pinned:false,keywords:"freeze frozen crash hang stuck during service emergency mac mini",answer:"<h3>If ProPresenter Freezes During Service:</h3><ol><li><strong>Don't panic</strong> - audience may not notice yet</li><li>Try clicking a different slide</li><li>Press ESC to clear current slide</li><li>Press arrow keys to advance</li><li>If totally frozen, check Activity Monitor (⌘+Space, type Activity Monitor)</li><li>Force quit ProPresenter if necessary</li><li>Relaunch immediately</li><li>Load most recent playlist</li></ol><h3>⚠️ Remember after relaunch:</h3><p>You may need to reconfigure displays if DisplayLink was affected</p><h3>Prevention:</h3><ul><li>Close unnecessary apps before service</li><li>Restart Mac Mini weekly</li><li>Keep ProPresenter updated</li><li>Test all media before service</li></ul>"},
+{id:21,question:"Sunday Setup app not working",category:"Setup",pinned:false,keywords:"sunday setup automation app not opening google drive displaylink propresenter",answer:"<h3>If Sunday Setup App Fails:</h3><ol><li>Try running it again (may have timeout issue)</li><li>Check internet connection</li><li>Manually launch in correct order:<ul><li>Open Google Drive folder</li><li>Launch DisplayLink Manager (wait 15 seconds)</li><li>Launch ProPresenter</li></ul></li></ol><h3>If Google Drive won't open:</h3><ul><li>Check you're logged into Google account</li><li>Try opening Drive manually in browser</li><li>Verify internet connection is working</li></ul><h3>If DisplayLink won't launch:</h3><ul><li>Check DisplayLink Manager is installed</li><li>Try launching manually from Applications</li><li>Restart Mac Mini if necessary</li></ul>"}
 ];
 
 const advancedSynonyms={
-    display:['screen','monitor','projector','output','showing'],
+    display:['screen','monitor','output','showing','tv','tvs'],
     blank:['black','nothing','empty','dark','no display'],
     propresenter:['pro presenter','pp','pro7','software','program'],
     slide:['slides','presentation','slideshow'],
     clicker:['remote','controller','advance','presenter'],
     lyrics:['words','text','song','worship'],
     video:['media','movie','clip','background'],
-    computer:['laptop','mac','pc','machine'],
+    computer:['laptop','mac','pc','machine','mac mini'],
     wrong:['incorrect','bad','different'],
     frozen:['freeze','stuck','hang','crash','locked'],
-    setup:['start','startup','turn on','boot'],
+    setup:['start','startup','turn on','boot','sunday setup','automation'],
     bible:['scripture','verse','verses','passage'],
-    stage:['confidence','monitor','pastor screen']
+    stage:['confidence','monitor','pastor screen'],
+    playlist:['presentation','service','order','sunday'],
+    download:['get','grab','pull','fetch'],
+    combine:['merge','join','put together','mix']
 };
 
 const problemPatterns = [
     {pattern: /no (display|screen|output|showing)/i, boost: ['blank', 'display', 'output', 'enable']},
-    {pattern: /(blank|black|nothing|empty).*(screen|display)/i, boost: ['blank', 'display', 'projector', 'output']},
+    {pattern: /(blank|black|nothing|empty).*(screen|display)/i, boost: ['blank', 'display', 'output']},
     {pattern: /(wrong|incorrect|different).*(screen|display|monitor)/i, boost: ['wrong screen', 'configuration', 'output']},
     {pattern: /(clicker|remote|advance).*(not work|broken|won't)/i, boost: ['clicker', 'remote', 'batteries', 'usb']},
     {pattern: /(lyrics|words|text).*(missing|not show|blank)/i, boost: ['lyrics', 'text', 'missing', 'layer']},
     {pattern: /(freeze|frozen|crash|stuck|hang)/i, boost: ['freeze', 'crash', 'frozen', 'force quit']},
-    {pattern: /(projector).*(won't|not|no).*(turn on|power)/i, boost: ['projector', 'power', 'remote']},
     {pattern: /stretched|aspect|distorted|squished/i, boost: ['stretched', 'aspect ratio', 'resolution']},
     {pattern: /(slow|lag|delay|sluggish)/i, boost: ['slow', 'performance', 'lag']},
     {pattern: /(can't find|missing|lost).*(presentation|playlist)/i, boost: ['missing', 'saved', 'file', 'playlist']},
+    {pattern: /(can't|won't|not).*(download|get)/i, boost: ['download', 'google drive', 'playlist']},
+    {pattern: /(combine|merge|join).*(playlist|message)/i, boost: ['combine', 'playlist', 'message']},
     {pattern: /(text|font).*(small|tiny|can't read)/i, boost: ['text', 'font size', 'small']},
     {pattern: /(video|background).*(not play|frozen|stuck)/i, boost: ['video', 'background', 'media']},
     {pattern: /stage (display|screen|monitor)/i, boost: ['stage display', 'confidence', 'monitor']},
@@ -701,506 +706,58 @@ const problemPatterns = [
     {pattern: /(bible|scripture|verse)/i, boost: ['bible', 'verses', 'scripture']},
     {pattern: /(timer|countdown|clock)/i, boost: ['timer', 'countdown', 'clock']},
     {pattern: /(audio|sound).*(video)/i, boost: ['audio', 'video', 'sound', 'muted']},
-    {pattern: /mirror|duplicate/i, boost: ['mirror', 'duplicate', 'displays']}
+    {pattern: /mirror|duplicate/i, boost: ['mirror', 'duplicate', 'displays']},
+    {pattern: /sunday setup|automation/i, boost: ['sunday setup', 'automation', 'google drive', 'displaylink']}
 ];
 
-const emergencyMap = {
-    'no-display': 2,
-    'wrong-screen': 3,
-    'not-advancing': 4
-};
+const emergencyMap={'no-display':2,'wrong-screen':3,'not-advancing':4};
+let recentSearches=[];
+const MAX_RECENT=5;
 
-let recentSearches = [];
-const MAX_RECENT = 5;
-
-function loadRecentSearches() {
-    const stored = {};
-    if (stored.recentSearches) {
-        recentSearches = stored.recentSearches;
-    }
-}
-
-function saveRecentSearch(query) {
-    if (!query || query.length < 2) return;
-    query = query.trim().toLowerCase();
-    recentSearches = recentSearches.filter(s => s !== query);
-    recentSearches.unshift(query);
-    recentSearches = recentSearches.slice(0, MAX_RECENT);
-    renderRecentSearches();
-}
-
-function renderRecentSearches() {
-    const container = document.getElementById('recentSearches');
-    const tagsContainer = document.getElementById('recentTags');
-    
-    if (recentSearches.length === 0) {
-        container.style.display = 'none';
-        return;
-    }
-    
-    container.style.display = 'block';
-    tagsContainer.innerHTML = recentSearches.map(search => 
-        `<span class="recent-tag" onclick="applyRecentSearch('${search}')">${search}</span>`
-    ).join('') + '<button class="clear-recent" onclick="clearRecentSearches()">Clear</button>';
-}
-
-function applyRecentSearch(query) {
-    document.getElementById('searchBar').value = query;
-    currentSearch = query;
-    renderAll();
-}
-
-function clearRecentSearches() {
-    recentSearches = [];
-    renderRecentSearches();
-}
-
-function expandSearchQuery(query) {
-    let words = query.toLowerCase().split(/\s+/).filter(w => w.length > 0);
-    
-    const stopWords = ['a', 'an', 'the', 'or', 'and', 'on', 'in', 'at', 'to', 'for', 'of', 'is', 'are'];
-    words = words.filter(w => !stopWords.includes(w) && w !== '/');
-    
-    let expanded = new Set(words);
-    
-    words.forEach(word => {
-        if (advancedSynonyms[word]) {
-            advancedSynonyms[word].forEach(syn => expanded.add(syn));
-        }
-        
-        Object.keys(advancedSynonyms).forEach(key => {
-            if (advancedSynonyms[key].includes(word)) {
-                expanded.add(key);
-                advancedSynonyms[key].forEach(syn => expanded.add(syn));
-            }
-        });
-    });
-    
-    problemPatterns.forEach(({pattern, boost}) => {
-        if (pattern.test(query)) {
-            boost.forEach(term => expanded.add(term));
-        }
-    });
-    
-    return Array.from(expanded).join(' ');
-}
-
-function highlightText(text, searchTerms) {
-    if (!searchTerms || searchTerms.length === 0) return text;
-    
-    const stopWords = ['a', 'an', 'the', 'or', 'and', 'on', 'in', 'at', 'to', 'for', 'of', 'is', 'are'];
-    const termsToHighlight = searchTerms.filter(term => !stopWords.includes(term.toLowerCase()) && term.length > 1);
-    
-    let result = text;
-    termsToHighlight.forEach(term => {
-        if (term.length < 2) return;
-        const regex = new RegExp(`(${term})`, 'gi');
-        result = result.replace(regex, '<span class="highlight">$1</span>');
-    });
-    return result;
-}
-
-function intelligentSearch(query) {
-    if (!query) return faqData;
-    
-    const originalQuery = query;
-    const expandedQuery = expandSearchQuery(query);
-    
-    const stopWords = ['a', 'an', 'the', 'or', 'and', 'on', 'in', 'at', 'to', 'for', 'of', 'is', 'are'];
-    const searchTerms = query.toLowerCase().split(/\s+/).filter(w => w.length > 1 && !stopWords.includes(w));
-    
-    const fuse = new Fuse(faqData, {
-        keys: [
-            {name: 'question', weight: 0.45},
-            {name: 'keywords', weight: 0.45},
-            {name: 'answer', weight: 0.1}
-        ],
-        threshold: 0.45,
-        includeScore: true,
-        ignoreLocation: true,
-        minMatchCharLength: 2,
-        distance: 150,
-        useExtendedSearch: true
-    });
-    
-    let results = fuse.search(expandedQuery);
-    
-    if (results.length < 3) {
-        const altResults = fuse.search(originalQuery);
-        results = [...results, ...altResults].filter((v, i, a) => 
-            a.findIndex(t => t.item.id === v.item.id) === i
-        );
-    }
-    
-    results = results.map(r => ({
-        ...r.item,
-        score: r.score,
-        searchTerms: searchTerms
-    }));
-    
-    results.forEach(result => {
-        let bonusScore = 0;
-        
-        const questionLower = result.question.toLowerCase();
-        const keywordsLower = result.keywords.toLowerCase();
-        const answerLower = result.answer.replace(/<[^>]*>/g, '').toLowerCase();
-        const combinedText = questionLower + ' ' + keywordsLower + ' ' + answerLower;
-        
-        if (questionLower.includes(originalQuery.toLowerCase())) {
-            bonusScore -= 0.5;
-        }
-        if (keywordsLower.includes(originalQuery.toLowerCase())) {
-            bonusScore -= 0.4;
-        }
-        
-        searchTerms.forEach((term, index) => {
-            const isImportantTerm = term.length > 4 || ['slide', 'remote'].includes(term);
-            const multiplier = isImportantTerm ? 1.5 : 1.0;
-            const positionBonus = index === 0 ? 1.2 : 1.0;
-            
-            if (questionLower.includes(term)) {
-                bonusScore -= 0.25 * multiplier * positionBonus;
-            }
-            if (keywordsLower.includes(term)) {
-                bonusScore -= 0.2 * multiplier * positionBonus;
-            }
-            
-            const answerMatches = (answerLower.match(new RegExp('\\b' + term + '\\b', 'g')) || []).length;
-            bonusScore -= answerMatches * 0.04;
-        });
-        
-        if (result.pinned) bonusScore -= 0.12;
-        
-        const allTermsInQuestion = searchTerms.every(term => questionLower.includes(term));
-        if (allTermsInQuestion) bonusScore -= 0.4;
-        
-        const allTermsInKeywords = searchTerms.every(term => keywordsLower.includes(term));
-        if (allTermsInKeywords) bonusScore -= 0.35;
-        
-        result.score += bonusScore;
-    });
-    
-    results.sort((a, b) => a.score - b.score);
-    
-    return results;
-}
+function loadRecentSearches(){const stored={};if(stored.recentSearches){recentSearches=stored.recentSearches;}}
+function saveRecentSearch(query){if(!query||query.length<2)return;query=query.trim().toLowerCase();recentSearches=recentSearches.filter(s=>s!==query);recentSearches.unshift(query);recentSearches=recentSearches.slice(0,MAX_RECENT);renderRecentSearches();}
+function renderRecentSearches(){const container=document.getElementById('recentSearches');const tagsContainer=document.getElementById('recentTags');if(recentSearches.length===0){container.style.display='none';return;}container.style.display='block';tagsContainer.innerHTML=recentSearches.map(search=>`<span class="recent-tag" onclick="applyRecentSearch('${search}')">${search}</span>`).join('')+'<button class="clear-recent" onclick="clearRecentSearches()">Clear</button>';}
+function applyRecentSearch(query){document.getElementById('searchBar').value=query;currentSearch=query;renderAll();}
+function clearRecentSearches(){recentSearches=[];renderRecentSearches();}
+function expandSearchQuery(query){let words=query.toLowerCase().split(/\s+/).filter(w=>w.length>0);const stopWords=['a','an','the','or','and','on','in','at','to','for','of','is','are'];words=words.filter(w=>!stopWords.includes(w)&&w!=='/');let expanded=new Set(words);words.forEach(word=>{if(advancedSynonyms[word]){advancedSynonyms[word].forEach(syn=>expanded.add(syn));}Object.keys(advancedSynonyms).forEach(key=>{if(advancedSynonyms[key].includes(word)){expanded.add(key);advancedSynonyms[key].forEach(syn=>expanded.add(syn));}});});problemPatterns.forEach(({pattern,boost})=>{if(pattern.test(query)){boost.forEach(term=>expanded.add(term));}});return Array.from(expanded).join(' ');}
+function highlightText(text,searchTerms){if(!searchTerms||searchTerms.length===0)return text;const stopWords=['a','an','the','or','and','on','in','at','to','for','of','is','are'];const termsToHighlight=searchTerms.filter(term=>!stopWords.includes(term.toLowerCase())&&term.length>1);let result=text;termsToHighlight.forEach(term=>{if(term.length<2)return;const regex=new RegExp(`(${term})`,'gi');result=result.replace(regex,'<span class="highlight">$1</span>');});return result;}
+function intelligentSearch(query){if(!query)return faqData;const originalQuery=query;const expandedQuery=expandSearchQuery(query);const stopWords=['a','an','the','or','and','on','in','at','to','for','of','is','are'];const searchTerms=query.toLowerCase().split(/\s+/).filter(w=>w.length>1&&!stopWords.includes(w));const fuse=new Fuse(faqData,{keys:[{name:'question',weight:0.45},{name:'keywords',weight:0.45},{name:'answer',weight:0.1}],threshold:0.45,includeScore:true,ignoreLocation:true,minMatchCharLength:2,distance:150,useExtendedSearch:true});let results=fuse.search(expandedQuery);if(results.length<3){const altResults=fuse.search(originalQuery);results=[...results,...altResults].filter((v,i,a)=>a.findIndex(t=>t.item.id===v.item.id)===i);}results=results.map(r=>({...r.item,score:r.score,searchTerms:searchTerms}));results.forEach(result=>{let bonusScore=0;const questionLower=result.question.toLowerCase();const keywordsLower=result.keywords.toLowerCase();const answerLower=result.answer.replace(/<[^>]*>/g,'').toLowerCase();if(questionLower.includes(originalQuery.toLowerCase())){bonusScore-=0.5;}if(keywordsLower.includes(originalQuery.toLowerCase())){bonusScore-=0.4;}searchTerms.forEach((term,index)=>{const isImportantTerm=term.length>4||['slide','remote'].includes(term);const multiplier=isImportantTerm?1.5:1.0;const positionBonus=index===0?1.2:1.0;if(questionLower.includes(term)){bonusScore-=0.25*multiplier*positionBonus;}if(keywordsLower.includes(term)){bonusScore-=0.2*multiplier*positionBonus;}const answerMatches=(answerLower.match(new RegExp('\\b'+term+'\\b','g'))||[]).length;bonusScore-=answerMatches*0.04;});if(result.pinned)bonusScore-=0.12;const allTermsInQuestion=searchTerms.every(term=>questionLower.includes(term));if(allTermsInQuestion)bonusScore-=0.4;const allTermsInKeywords=searchTerms.every(term=>keywordsLower.includes(term));if(allTermsInKeywords)bonusScore-=0.35;result.score+=bonusScore;});results.sort((a,b)=>a.score-b.score);return results;}
 
 let suggestionTimeout;
+function showSuggestions(query){clearTimeout(suggestionTimeout);if(!query||query.length<2){document.getElementById('suggestionsDropdown').classList.remove('active');return;}suggestionTimeout=setTimeout(()=>{const results=intelligentSearch(query).slice(0,5);const dropdown=document.getElementById('suggestionsDropdown');if(results.length===0){dropdown.classList.remove('active');return;}dropdown.innerHTML=results.map((faq,index)=>{const cleanAnswer=faq.answer.replace(/<\/?(h3|ol|ul|li|p|strong)[^>]*>/gi,' ').replace(/<[^>]*>/g,'').replace(/\s+/g,' ').trim();const preview=cleanAnswer.substring(0,80)+'...';const highlightedQuestion=highlightText(faq.question,faq.searchTerms);return`<div class="suggestion-item" data-index="${index}" data-id="${faq.id}"><div class="suggestion-question">${highlightedQuestion}</div><div class="suggestion-preview">${preview}</div><span class="suggestion-category">${faq.category}</span></div>`;}).join('');dropdown.classList.add('active');dropdown.querySelectorAll('.suggestion-item').forEach(item=>{item.addEventListener('click',()=>{const faqId=parseInt(item.dataset.id);const faq=faqData.find(f=>f.id===faqId);if(faq){document.getElementById('searchBar').value=faq.question;currentSearch=faq.question;saveRecentSearch(query);renderAll();dropdown.classList.remove('active');setTimeout(()=>{const faqElement=document.querySelector(`.faq-item[data-id="${faqId}"]`);if(faqElement){faqElement.scrollIntoView({behavior:'smooth',block:'center'});faqElement.click();}},100);}});});},200);}
 
-function showSuggestions(query) {
-    clearTimeout(suggestionTimeout);
-    
-    if (!query || query.length < 2) {
-        document.getElementById('suggestionsDropdown').classList.remove('active');
-        return;
-    }
-    
-    suggestionTimeout = setTimeout(() => {
-        const results = intelligentSearch(query).slice(0, 5);
-        const dropdown = document.getElementById('suggestionsDropdown');
-        
-        if (results.length === 0) {
-            dropdown.classList.remove('active');
-            return;
-        }
-        
-        dropdown.innerHTML = results.map((faq, index) => {
-            const cleanAnswer = faq.answer
-                .replace(/<\/?(h3|ol|ul|li|p|strong)[^>]*>/gi, ' ')
-                .replace(/<[^>]*>/g, '')
-                .replace(/\s+/g, ' ')
-                .trim();
-            
-            const preview = cleanAnswer.substring(0, 80) + '...';
-            const highlightedQuestion = highlightText(faq.question, faq.searchTerms);
-            
-            return `
-                <div class="suggestion-item" data-index="${index}" data-id="${faq.id}">
-                    <div class="suggestion-question">${highlightedQuestion}</div>
-                    <div class="suggestion-preview">${preview}</div>
-                    <span class="suggestion-category">${faq.category}</span>
-                </div>
-            `;
-        }).join('');
-        
-        dropdown.classList.add('active');
-        
-        dropdown.querySelectorAll('.suggestion-item').forEach(item => {
-            item.addEventListener('click', () => {
-                const faqId = parseInt(item.dataset.id);
-                const faq = faqData.find(f => f.id === faqId);
-                if (faq) {
-                    document.getElementById('searchBar').value = faq.question;
-                    currentSearch = faq.question;
-                    saveRecentSearch(query);
-                    renderAll();
-                    dropdown.classList.remove('active');
-                    
-                    setTimeout(() => {
-                        const faqElement = document.querySelector(`.faq-item[data-id="${faqId}"]`);
-                        if (faqElement) {
-                            faqElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                            faqElement.click();
-                        }
-                    }, 100);
-                }
-            });
-        });
-    }, 200);
-}
+let currentCategory='all';
+let currentSearch='';
 
-let currentCategory = 'all';
-let currentSearch = '';
+function convertToCheckboxes(htmlContent){const parser=new DOMParser();const doc=parser.parseFromString(htmlContent,'text/html');doc.querySelectorAll('ol li, ul li').forEach((li,index)=>{const checkbox=document.createElement('input');checkbox.type='checkbox';checkbox.id=`step-${Date.now()}-${index}`;const label=document.createElement('label');label.htmlFor=checkbox.id;label.innerHTML=li.innerHTML;const wrapper=document.createElement('div');wrapper.className='step-checkbox';wrapper.appendChild(checkbox);wrapper.appendChild(label);checkbox.addEventListener('change',(e)=>{if(e.target.checked){wrapper.classList.add('completed');}else{wrapper.classList.remove('completed');}});li.parentNode.replaceChild(wrapper,li);});return doc.body.innerHTML;}
 
-function convertToCheckboxes(htmlContent) {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(htmlContent, 'text/html');
-    
-    doc.querySelectorAll('ol li, ul li').forEach((li, index) => {
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.id = `step-${Date.now()}-${index}`;
-        
-        const label = document.createElement('label');
-        label.htmlFor = checkbox.id;
-        label.innerHTML = li.innerHTML;
-        
-        const wrapper = document.createElement('div');
-        wrapper.className = 'step-checkbox';
-        wrapper.appendChild(checkbox);
-        wrapper.appendChild(label);
-        
-        checkbox.addEventListener('change', (e) => {
-            if (e.target.checked) {
-                wrapper.classList.add('completed');
-            } else {
-                wrapper.classList.remove('completed');
-            }
-        });
-        
-        li.parentNode.replaceChild(wrapper, li);
-    });
-    
-    return doc.body.innerHTML;
-}
+function renderFAQ(faq,container){const item=document.createElement('div');item.className=`faq-item ${faq.pinned?'pinned':''}`;item.dataset.id=faq.id;const cleanAnswer=faq.answer.replace(/<\/?(h3|ol|ul|li|p|strong)[^>]*>/gi,' ').replace(/<[^>]*>/g,'').replace(/\s+/g,' ').trim();const preview=cleanAnswer.substring(0,120)+'...';const highlightedQuestion=faq.searchTerms?highlightText(faq.question,faq.searchTerms):faq.question;const highlightedPreview=faq.searchTerms?highlightText(preview,faq.searchTerms):preview;const answerWithCheckboxes=convertToCheckboxes(faq.answer);item.innerHTML=`<div class="faq-question"><span>${highlightedQuestion}</span><span class="expand-icon">▼</span></div><span class="faq-category">${faq.category}</span><div class="faq-preview">${highlightedPreview}</div><div class="faq-answer">${answerWithCheckboxes}<div class="feedback-section"><div class="feedback-question">Did this solve your problem?</div><div class="feedback-buttons"><button class="feedback-btn yes">✓ Yes, it worked!</button><button class="feedback-btn no">✗ No, still broken</button></div><div class="feedback-thanks"></div></div></div>`;item.onclick=(e)=>{if(e.target.closest('.step-checkbox')||e.target.closest('.feedback-section')){return;}const isExpanded=item.classList.contains('expanded');document.querySelectorAll('.faq-answer').forEach(a=>a.classList.remove('expanded'));document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('expanded'));if(!isExpanded){item.classList.add('expanded');item.querySelector('.faq-answer').classList.add('expanded');}};const yesBtn=item.querySelector('.feedback-btn.yes');const noBtn=item.querySelector('.feedback-btn.no');const thanksMsg=item.querySelector('.feedback-thanks');const feedbackBtns=item.querySelector('.feedback-buttons');yesBtn.onclick=(e)=>{e.stopPropagation();feedbackBtns.style.display='none';thanksMsg.textContent='✓ Great! Glad we could help!';thanksMsg.classList.add('show');};noBtn.onclick=(e)=>{e.stopPropagation();feedbackBtns.style.display='none';thanksMsg.textContent='🔧 Please report this issue so we can improve!';thanksMsg.style.color='#fbbf24';thanksMsg.classList.add('show');setTimeout(()=>{document.getElementById('reportBtn').click();},1500);};container.appendChild(item);}
 
-function renderFAQ(faq, container) {
-    const item = document.createElement('div');
-    item.className = `faq-item ${faq.pinned ? 'pinned' : ''}`;
-    item.dataset.id = faq.id;
-    
-    const cleanAnswer = faq.answer
-        .replace(/<\/?(h3|ol|ul|li|p|strong)[^>]*>/gi, ' ')
-        .replace(/<[^>]*>/g, '')
-        .replace(/\s+/g, ' ')
-        .trim();
-    
-    const preview = cleanAnswer.substring(0, 120) + '...';
-    const highlightedQuestion = faq.searchTerms ? highlightText(faq.question, faq.searchTerms) : faq.question;
-    const highlightedPreview = faq.searchTerms ? highlightText(preview, faq.searchTerms) : preview;
-    
-    const answerWithCheckboxes = convertToCheckboxes(faq.answer);
-    
-    item.innerHTML = `
-        <div class="faq-question"><span>${highlightedQuestion}</span><span class="expand-icon">▼</span></div>
-        <span class="faq-category">${faq.category}</span>
-        <div class="faq-preview">${highlightedPreview}</div>
-        <div class="faq-answer">
-            ${answerWithCheckboxes}
-            <div class="feedback-section">
-                <div class="feedback-question">Did this solve your problem?</div>
-                <div class="feedback-buttons">
-                    <button class="feedback-btn yes">✓ Yes, it worked!</button>
-                    <button class="feedback-btn no">✗ No, still broken</button>
-                </div>
-                <div class="feedback-thanks"></div>
-            </div>
-        </div>
-    `;
-    
-    item.onclick = (e) => {
-        if (e.target.closest('.step-checkbox') || e.target.closest('.feedback-section')) {
-            return;
-        }
-        
-        const isExpanded = item.classList.contains('expanded');
-        document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('expanded'));
-        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('expanded'));
-        if (!isExpanded) {
-            item.classList.add('expanded');
-            item.querySelector('.faq-answer').classList.add('expanded');
-        }
-    };
-    
-    const yesBtn = item.querySelector('.feedback-btn.yes');
-    const noBtn = item.querySelector('.feedback-btn.no');
-    const thanksMsg = item.querySelector('.feedback-thanks');
-    const feedbackBtns = item.querySelector('.feedback-buttons');
-    
-    yesBtn.onclick = (e) => {
-        e.stopPropagation();
-        feedbackBtns.style.display = 'none';
-        thanksMsg.textContent = '✓ Great! Glad we could help!';
-        thanksMsg.classList.add('show');
-    };
-    
-    noBtn.onclick = (e) => {
-        e.stopPropagation();
-        feedbackBtns.style.display = 'none';
-        thanksMsg.textContent = '🔧 Please report this issue so we can improve!';
-        thanksMsg.style.color = '#fbbf24';
-        thanksMsg.classList.add('show');
-        
-        setTimeout(() => {
-            document.getElementById('reportBtn').click();
-        }, 1500);
-    };
-    
-    container.appendChild(item);
-}
+function renderAll(){document.getElementById('pinnedList').innerHTML='';document.getElementById('faqList').innerHTML='';document.getElementById('suggestionsDropdown').classList.remove('active');let filtered=faqData;if(currentCategory!=='all'){filtered=faqData.filter(f=>f.category===currentCategory);}if(currentSearch){filtered=intelligentSearch(currentSearch);document.getElementById('pinnedSection').style.display='none';document.getElementById('emergencyActions').style.display='none';if(filtered.length===0){document.getElementById('noResults').style.display='block';document.getElementById('faqList').style.display='none';document.getElementById('searchStats').textContent='';return;}else{document.getElementById('noResults').style.display='none';document.getElementById('faqList').style.display='flex';document.getElementById('searchStats').textContent=`Found ${filtered.length} result${filtered.length!==1?'s':''}`;}filtered.forEach(f=>renderFAQ(f,document.getElementById('faqList')));saveRecentSearch(currentSearch);}else{document.getElementById('pinnedSection').style.display='block';document.getElementById('emergencyActions').style.display='grid';document.getElementById('noResults').style.display='none';document.getElementById('faqList').style.display='flex';document.getElementById('searchStats').textContent='';const pinned=filtered.filter(f=>f.pinned);pinned.forEach(f=>renderFAQ(f,document.getElementById('pinnedList')));filtered.filter(f=>!f.pinned).forEach(f=>renderFAQ(f,document.getElementById('faqList')));}}
 
-function renderAll() {
-    document.getElementById('pinnedList').innerHTML = '';
-    document.getElementById('faqList').innerHTML = '';
-    document.getElementById('suggestionsDropdown').classList.remove('active');
-    
-    let filtered = faqData;
-    
-    if (currentCategory !== 'all') {
-        filtered = faqData.filter(f => f.category === currentCategory);
-    }
-    
-    if (currentSearch) {
-        filtered = intelligentSearch(currentSearch);
-        document.getElementById('pinnedSection').style.display = 'none';
-        document.getElementById('emergencyActions').style.display = 'none';
-        
-        if (filtered.length === 0) {
-            document.getElementById('noResults').style.display = 'block';
-            document.getElementById('faqList').style.display = 'none';
-            document.getElementById('searchStats').textContent = '';
-            return;
-        } else {
-            document.getElementById('noResults').style.display = 'none';
-            document.getElementById('faqList').style.display = 'flex';
-            document.getElementById('searchStats').textContent = `Found ${filtered.length} result${filtered.length !== 1 ? 's' : ''}`;
-        }
-        
-        filtered.forEach(f => renderFAQ(f, document.getElementById('faqList')));
-        
-        saveRecentSearch(currentSearch);
-    } else {
-        document.getElementById('pinnedSection').style.display = 'block';
-        document.getElementById('emergencyActions').style.display = 'grid';
-        document.getElementById('noResults').style.display = 'none';
-        document.getElementById('faqList').style.display = 'flex';
-        document.getElementById('searchStats').textContent = '';
-        
-        const pinned = filtered.filter(f => f.pinned);
-        pinned.forEach(f => renderFAQ(f, document.getElementById('pinnedList')));
-        filtered.filter(f => !f.pinned).forEach(f => renderFAQ(f, document.getElementById('faqList')));
-    }
-}
+const searchBar=document.getElementById('searchBar');
+const clearSearchBtn=document.getElementById('clearSearch');
+const searchIcon=document.getElementById('searchIcon');
 
-const searchBar = document.getElementById('searchBar');
-const clearSearchBtn = document.getElementById('clearSearch');
-const searchIcon = document.getElementById('searchIcon');
+searchBar.addEventListener('input',e=>{currentSearch=e.target.value.trim();if(e.target.value){clearSearchBtn.classList.add('active');searchIcon.style.display='none';}else{clearSearchBtn.classList.remove('active');searchIcon.style.display='block';}showSuggestions(currentSearch);if(!currentSearch)renderAll();});
 
-searchBar.addEventListener('input', e => {
-    currentSearch = e.target.value.trim();
-    
-    if (e.target.value) {
-        clearSearchBtn.classList.add('active');
-        searchIcon.style.display = 'none';
-    } else {
-        clearSearchBtn.classList.remove('active');
-        searchIcon.style.display = 'block';
-    }
-    
-    showSuggestions(currentSearch);
-    if (!currentSearch) renderAll();
-});
+searchBar.addEventListener('keydown',e=>{if(e.key==='Enter'){renderAll();}});
 
-searchBar.addEventListener('keydown', e => {
-    if (e.key === 'Enter') {
-        renderAll();
-    }
-});
+clearSearchBtn.addEventListener('click',()=>{searchBar.value='';currentSearch='';clearSearchBtn.classList.remove('active');searchIcon.style.display='block';renderAll();searchBar.focus();});
 
-clearSearchBtn.addEventListener('click', () => {
-    searchBar.value = '';
-    currentSearch = '';
-    clearSearchBtn.classList.remove('active');
-    searchIcon.style.display = 'block';
-    renderAll();
-    searchBar.focus();
-});
+document.addEventListener('click',e=>{if(!e.target.closest('.search-container')){document.getElementById('suggestionsDropdown').classList.remove('active');}});
 
-document.addEventListener('click', e => {
-    if (!e.target.closest('.search-container')) {
-        document.getElementById('suggestionsDropdown').classList.remove('active');
-    }
-});
+document.querySelectorAll('.category-btn').forEach(btn=>btn.onclick=()=>{document.querySelectorAll('.category-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');currentCategory=btn.dataset.category;document.getElementById('searchBar').value='';currentSearch='';renderAll();});
 
-document.querySelectorAll('.category-btn').forEach(btn => btn.onclick = () => {
-    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentCategory = btn.dataset.category;
-    document.getElementById('searchBar').value = '';
-    currentSearch = '';
-    renderAll();
-});
+document.querySelectorAll('.emergency-btn').forEach(btn=>{btn.addEventListener('click',()=>{const issueType=btn.dataset.issue;const faqId=emergencyMap[issueType];const faq=faqData.find(f=>f.id===faqId);if(faq){document.getElementById('searchBar').value=faq.question;currentSearch=faq.question;renderAll();setTimeout(()=>{const faqElement=document.querySelector(`.faq-item[data-id="${faqId}"]`);if(faqElement){faqElement.scrollIntoView({behavior:'smooth',block:'center'});faqElement.click();}},100);}});});
 
-document.querySelectorAll('.emergency-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const issueType = btn.dataset.issue;
-        const faqId = emergencyMap[issueType];
-        const faq = faqData.find(f => f.id === faqId);
-        
-        if (faq) {
-            document.getElementById('searchBar').value = faq.question;
-            currentSearch = faq.question;
-            renderAll();
-            
-            setTimeout(() => {
-                const faqElement = document.querySelector(`.faq-item[data-id="${faqId}"]`);
-                if (faqElement) {
-                    faqElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    faqElement.click();
-                }
-            }, 100);
-        }
-    });
-});
+document.getElementById('reportBtn').onclick=e=>{e.preventDefault();document.getElementById('contactModal').style.display='block';};
 
-document.getElementById('reportBtn').onclick = e => {
-    e.preventDefault();
-    document.getElementById('contactModal').style.display = 'block';
-};
+document.getElementById('cancelBtn').onclick=()=>{document.getElementById('contactModal').style.display='none';};
 
-document.getElementById('cancelBtn').onclick = () => {
-    document.getElementById('contactModal').style.display = 'none';
-};
+document.getElementById('contactModal').onclick=e=>{if(e.target.id==='contactModal'){document.getElementById('contactModal').style.display='none';}};
 
-document.getElementById('contactModal').onclick = e => {
-    if (e.target.id === 'contactModal') {
-        document.getElementById('contactModal').style.display = 'none';
-    }
-};
-
-document.getElementById('contactForm').onsubmit = async e => {
-    e.preventDefault();
-    const res = await fetch(e.target.action, {
-        method: 'POST',
-        body: new FormData(e.target),
-        headers: {'Accept': 'application/json'}
-    });
-    if (res.ok) {
-        document.getElementById('contactForm').style.display = 'none';
-        document.getElementById('successMessage').style.display = 'block';
-        setTimeout(() => document.getElementById('contactModal').style.display = 'none', 3000);
-    }
-};
+document.getElementById('contactForm').onsubmit=async e=>{e.preventDefault();const res=await fetch(e.target.action,{method:'POST',body:new FormData(e.target),headers:{'Accept':'application/json'}});if(res.ok){document.getElementById('contactForm').style.display='none';document.getElementById('successMessage').style.display='block';setTimeout(()=>document.getElementById('contactModal').style.display='none',3000);}};
 
 loadRecentSearches();
 renderRecentSearches();
